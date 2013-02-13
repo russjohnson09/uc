@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- Artifact -->
+	<groupId>uc</groupId>
+	<version>0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<!-- Description -->
+	<name>My project</name>
+	<description>Description of my project (see pom.xml).</description>
+	<!-- Properties -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<uctool.version>2.0.0</uctool.version>
+		<projectArtifactId>${project.artifactId}</projectArtifactId>
+		<projectVersion>${project.version}</projectVersion>
+	</properties>
+	<!-- Build -->
+	<build>
+		<defaultGoal>generate-resources</defaultGoal>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>net.sf.uctool</groupId>
+										<artifactId>uctool-maven-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>use-cases</goal>
+											<goal>extract-resources</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute>
+											<runOnIncremental>true</runOnIncremental>
+										</execute>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>net.sf.uctool</groupId>
+				<artifactId>uctool-maven-plugin</artifactId>
+				<version>2.0.0</version>
+				<executions>
+					<execution>
+						<id>use-cases</id>
+						<goals>
+							<goal>use-cases</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>extract-resources</id>
+						<goals>
+							<goal>extract-resources</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>net.sf.saxon</groupId>
+						<artifactId>saxon</artifactId>
+						<version>8.7</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<!-- Dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.uctool</groupId>
+			<artifactId>uctool</artifactId>
+			<version>${uctool.version}</version>
+		</dependency>
+	</dependencies>
+	<artifactId>uc</artifactId>
+</project>

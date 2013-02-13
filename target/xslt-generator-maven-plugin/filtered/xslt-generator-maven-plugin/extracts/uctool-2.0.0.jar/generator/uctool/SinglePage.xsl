@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stylesheet xmlns="http://www.w3.org/1999/XSL/Transform"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:uct="http://uctool.sf.net/"
+	version="2.0">
+<import href="Requirement.xsl" />	
+<import href="RequirementIndex.xsl" />
+<import href="ActorGoalList.xsl" />
+<import href="Actor.xsl" />
+<import href="ActorIndex.xsl" />
+<import href="UseCase.xsl" />
+<import href="UseCaseIndex.xsl" />
+<import href="Data.xsl" />
+<import href="DataIndex.xsl" />
+<import href="AttachmentIndex.xsl" />
+<output method="text" />
+
+<param name="ucs-name" />
+<param name="ucs-version" />
+<param name="ucs-description" />
+
+<variable name="merged-file" select="/" />
+<variable name="link-type" select="'single'" />
+
+<template match="/">
+<text/>&lt;!DOCTYPE HTML>
+&lt;html>
+&lt;head>
+&lt;title>Analytical Documentation&lt;/title>
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+&lt;link rel="stylesheet" type="text/css" href="../resources/css/styles.css"/>
+&lt;link rel="shortcut icon" href="../resources/favicon.ico" />
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+&lt;/head>
+&lt;body>
+&lt;div class="container">
+&lt;h1>Analytical Documentation&lt;/h1>
+&lt;p class="lead">Name: <value-of select="$ucs-name" />&lt;br/>
+Version: <value-of select="$ucs-version" />&lt;/p>
+&lt;p class="lead"><value-of select="$ucs-description" />&lt;/p><text />
+
+<call-template name="requirement-index-template" />
+
+&lt;h2>Requirements details&lt;/h2><text />
+<for-each select="//uct:requirement">
+<call-template name="requirement-template" />
+</for-each>
+
+<call-template name="actor-index-template" />
+
+&lt;h2>Actors details&lt;/h2><text />
+<for-each select="//uct:actor">
+<text>
+</text>
+<call-template name="actor-template" />
+</for-each>
+
+<call-template name="use-case-index-template" />
+
+&lt;h2>Use cases details&lt;/h2><text />
+<for-each select="//uct:use-case[@code]">
+<call-template name="use-case-template" />
+</for-each>
+
+<call-template name="data-index-template" />
+
+&lt;h2>Data structures details&lt;/h2><text />
+<for-each select="//uct:data-structure">
+<call-template name="data-structure-template" />
+</for-each>
+
+<call-template name="attachment-index-template" />
+
+<text/>
+&lt;/p/><text/>
+<value-of select="uct:uctool-link()" />
+&lt;/div>
+&lt;script src="../resources/js/scripts.js" type="text/javascript">&lt;/script>
+&lt;/body>
+&lt;/html>
+<text/>
+</template>
+
+</stylesheet>
